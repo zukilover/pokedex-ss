@@ -5,9 +5,9 @@ import 'whatwg-fetch';
 import config from 'config';
 
 class PokemonApi {
-  static getAllPokemons() {
+  static getAllPokemons(next) {
     return fetch(
-      config.API_PATH.list,
+      next ? (config.CORS_PROXY + next) : config.API_PATH.list,
       {
         headers: {
           'Origin': 'localhost',

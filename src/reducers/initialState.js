@@ -7,5 +7,9 @@ export default {
   detail: {},
   spec: {
     isFetching: false
+  },
+  loadParams: {
+    hasMore: true,
+    next: null
   }
 }

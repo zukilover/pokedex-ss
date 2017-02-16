@@ -6,14 +6,16 @@ import {
   pokemonReducer as pokemons,
   pokemonDetailsReducer as details,
   pokemonDetailReducer as detail,
-  pokemonSpecReducer as spec
+  pokemonSpecReducer as spec,
+  loadParamsReducer as loadParams
 } from './pokemonReducer';
 
 const rootReducer = combineReducers({
   pokemons,
   details,
   detail,
-  spec
+  spec,
+  loadParams
 });
 
 export default rootReducer;

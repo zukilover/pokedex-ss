@@ -5,8 +5,8 @@ import pokemonApi from '../api/pokemonApi';
 import * as types from './actionTypes';
 
 export function loadPokemons() {
-  return function(dispatch) {
-    return pokemonApi.getAllPokemons().then(response => {
+  return function(dispatch, getState) {
+    return pokemonApi.getAllPokemons(getState().loadParams.next).then(response => {
       dispatch(loadPokemonsSuccess(response));
     }).catch(error => {
       throw(error);
@@ -46,15 +46,29 @@ export function getPokemonSpec(id) {
 }
 
 export function loadPokemonsSuccess(response) {
-  return {
-    type: types.LOAD_POKEMONS_SUCCESS,
-    response
-  };
+  return function (dispatch, getState) {
+    dispatch(loadParams(
+      Object.assign({}, response, {
+        hasMore: getState().pokemons.length < response.count
+      })
+    ));
+    dispatch({
+      type: types.LOAD_POKEMONS_SUCCESS,
+      response
+    })
+  }
 }
 
 export function loadPokemonDetailSuccess(response) {
   return {
     type: types.LOAD_POKEMON_DETAILS_SUCCESS,
+    response
+  };
+}
+
+export function loadParams(response) {
+  return {
+    type: types.LOAD_PARAMS,
     response
   };
 }

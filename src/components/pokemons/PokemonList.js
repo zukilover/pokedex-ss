@@ -4,15 +4,24 @@
 import React, { PropTypes } from 'react';
 import { Row } from 'react-foundation';
 import Equalizer from 'react-equalizer';
+import InfiniteScroll from 'react-infinite-scroller';
 import PokemonListItem from './PokemonListItem';
 
-const PokemonList = ({pokemons}) => {
+const PokemonList = ({hasMore, loadPokemons, pokemons}) => {
+  const allPokemons = pokemons.map(pokemon =>
+    <PokemonListItem large={3} key={pokemon.name} pokemon={pokemon} />
+  );
   return (
     <Row className="display">
       <Equalizer>
-        {pokemons.map(pokemon =>
-          <PokemonListItem large={3} key={pokemon.name} pokemon={pokemon} />
-        )}
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={loadPokemons}
+          hasMore={hasMore}
+          loader={<div className="loader">Loading ...</div>}
+        >
+        {allPokemons}
+        </InfiniteScroll>
       </Equalizer>
     </Row>
   );

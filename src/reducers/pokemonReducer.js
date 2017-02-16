@@ -7,7 +7,7 @@ import initialState from './initialState';
 export function pokemonReducer(state = initialState.pokemons, action) {
   switch(action.type) {
     case types.LOAD_POKEMONS_SUCCESS:
-      return action.response.results
+      return state.concat(action.response.results);
     default:
       return state;
   }
@@ -43,6 +43,15 @@ export function pokemonSpecReducer(state = initialState.spec, action) {
       return Object.assign({}, state, action.spec, {
         isFetching: false
       });
+    default:
+      return state;
+  }
+}
+
+export function loadParamsReducer(state = initialState.loadParams, action) {
+  switch(action.type) {
+    case types.LOAD_PARAMS:
+      return action.response;
     default:
       return state;
   }

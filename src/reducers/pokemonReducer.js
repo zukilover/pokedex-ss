@@ -12,3 +12,14 @@ export function pokemonReducer(state = initialState.pokemons, action) {
       return state;
   }
 }
+
+export function pokemonDetailsReducer(state = initialState.details, action) {
+  switch(action.type) {
+    case types.LOAD_POKEMON_DETAILS_SUCCESS:
+      return Object.assign([], state, {
+        [action.response.name]: action.response
+      });
+    default:
+      return state;
+  }
+}

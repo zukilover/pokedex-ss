@@ -6,17 +6,25 @@ import {
   Button,
   Column
 } from 'react-foundation';
+import { loadPokemonDetail } from '../../actions/pokemonActions';
 
 class PokemonListItem extends React.Component {
+  componentDidMount(){
+    this.props.dispatch(loadPokemonDetail(this.props.pokemon.name));
+  }
+
   render() {
     const pokemon   = this.props.pokemon;
+    const details   = this.props.details;
+    const thumbnail = details[pokemon.name] ? details[pokemon.name].sprites.front_shiny : 'images/noun_560380_cc.png';
     return(
     <Column large={3}>
       <div className="card">
         <div className="card-section text-center">
           <h4>{this.props.pokemon.name}</h4>
           <Link to={'/pokemon/' + pokemon.name}>
-            <Button color={Colors.PRIMARY}>Lihat detail</Button>
+            <p className="contain-thumbnail"><img src={thumbnail} /></p>
+            <Button color={Colors.PRIMARY} isDisabled={!details[pokemon.name]}>Lihat detail</Button>
           </Link>
         </div>
       </div>
@@ -27,11 +35,14 @@ class PokemonListItem extends React.Component {
 
 
 PokemonListItem.propTypes = {
-  pokemon: PropTypes.object.isRequired
+  pokemon: PropTypes.object.isRequired,
+  details: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    details: state.details
+  }
 }
 
 export default connect(mapStateToProps)(PokemonListItem);

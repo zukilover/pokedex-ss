@@ -14,21 +14,21 @@ const StatWidget = (props) => {
     <Row>
       <Equalizer>
         <Column medium={4}>
-          <StatBox title="Weight">
+          <StatBox title="Weight" icon="torso">
             {props.content.weight / 10} kg
           </StatBox>
         </Column>
       </Equalizer>
       <Equalizer>
         <Column medium={4}>
-          <StatBox title="Height">
+          <StatBox title="Height" icon="male">
             {props.content.height / 10} m
           </StatBox>
         </Column>
       </Equalizer>
       <Equalizer>
         <Column medium={4}>
-          <StatBox title="Abilities">
+          <StatBox title="Abilities" icon="star">
             <div className="contain-ability">
               {
                 props.content.abilities ?

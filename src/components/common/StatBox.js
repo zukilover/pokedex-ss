@@ -10,7 +10,17 @@ const StatBox = (props) => {
     <table>
       <thead>
       <tr>
-        <th>{ props.loading ? <LoadingText /> : <TitleCase text={props.title} />}</th>
+        <th>
+          {
+            props.loading ? <LoadingText /> :
+            (
+              <span>
+                <i className={'fi-' + props.icon}></i>
+                <TitleCase text={props.title} />
+              </span>
+            )
+          }
+        </th>
       </tr>
       </thead>
       <tbody>
@@ -24,13 +34,15 @@ const StatBox = (props) => {
   )
 };
 
-LoadingText.PropTypes = {
+StatBox.PropTypes = {
   title: PropTypes.string,
+  icon: PropTypes.string,
   isLong: PropTypes.boolean
 };
 
-LoadingText.defaultProps = {
+StatBox.defaultProps = {
   title: '',
+  icon: 'info',
   isLong: false
 };
 

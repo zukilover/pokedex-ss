@@ -1,7 +1,16 @@
-import 'core-js/fn/object/assign';
+import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/Main';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import routes from './routes';
+import configureStore from './stores/configureStore';
 
-// Render the main component into the dom
-ReactDOM.render(<App />, document.getElementById('app'));
+const store = configureStore();
+
+render(
+  <Provider store={store}>
+    <Router history={browserHistory} routes={routes} />
+  </Provider>,
+  document.getElementById('app')
+);

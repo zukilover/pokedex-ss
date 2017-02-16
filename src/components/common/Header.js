@@ -7,6 +7,7 @@ import {
   Row,
   Column
 } from 'react-foundation';
+import Search from './Search';
 
 const Header = () => {
   return (
@@ -20,9 +21,7 @@ const Header = () => {
               </IndexLink>
             </div>
             <div className="top-bar-right">
-              <ul className="menu">
-                <li><input type="search" placeholder="Search" /></li>
-              </ul>
+              <Search />
             </div>
           </Column>
         </Row>

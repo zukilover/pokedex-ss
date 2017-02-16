@@ -3,6 +3,7 @@
  */
 import pokemonApi from '../api/pokemonApi';
 import * as types from './actionTypes';
+import _ from 'lodash';
 
 export function loadPokemons() {
   return function(dispatch, getState) {
@@ -74,4 +75,28 @@ export function loadParams(response) {
     type: types.LOAD_PARAMS,
     response
   };
+}
+
+export function filterList(text) {
+  return function (dispatch, getState) {
+    const filteredTypes = _.filter(getState().details,
+      detail =>
+      _.some(detail.types, {
+        'type': {
+          'name' : text
+        }
+      })
+    );
+    const filteredList = _.flatten(_.map(filteredTypes, detail =>
+      _.filter(getState().pokemons, { 'name' : detail.name })
+    ));
+    const response = {
+      text: text,
+      list: filteredList
+    };
+    dispatch({
+      type: types.FILTER_LIST,
+      response
+    })
+  }
 }

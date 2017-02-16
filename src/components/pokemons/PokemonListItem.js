@@ -7,6 +7,7 @@ import {
 } from 'react-foundation';
 import { loadPokemonDetail } from '../../actions/pokemonActions';
 import PokemonItem from './PokemonItem';
+import _ from 'lodash';
 
 class PokemonListItem extends React.Component {
   componentDidMount(){
@@ -16,12 +17,13 @@ class PokemonListItem extends React.Component {
   render() {
     const pokemon   = this.props.pokemon;
     const details   = this.props.details;
-    const thumbnail = details[pokemon.name] ? details[pokemon.name].sprites.front_shiny : 'images/noun_560380_cc.png';
+    const detail    = _.filter(details, { 'name' : pokemon.name })[0];
+    const thumbnail = detail ? detail.sprites.front_shiny : 'images/noun_560380_cc.png';
     return(
       <PokemonItem pokemon={pokemon}>
         <Link to={'/pokemon/' + pokemon.name}>
           <p className="contain-thumbnail"><img src={thumbnail} /></p>
-          <Button color={Colors.PRIMARY} isDisabled={!details[pokemon.name]}>Lihat detail</Button>
+          <Button color={Colors.PRIMARY} isDisabled={!detail}>Lihat detail</Button>
         </Link>
       </PokemonItem>
     )

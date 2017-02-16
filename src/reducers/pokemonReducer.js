@@ -8,7 +8,8 @@ import _ from 'lodash';
 export function pokemonReducer(state = initialState.pokemons, action) {
   switch(action.type) {
     case types.LOAD_POKEMONS_SUCCESS:
-      return _.uniqBy(state.concat(action.response.results), 'name');
+      const list = Object.assign([], state);
+      return _.uniqBy(list.concat(action.response.results), 'name');
     default:
       return state;
   }
@@ -17,9 +18,8 @@ export function pokemonReducer(state = initialState.pokemons, action) {
 export function pokemonDetailsReducer(state = initialState.details, action) {
   switch(action.type) {
     case types.LOAD_POKEMON_DETAILS_SUCCESS:
-      return Object.assign([], state, {
-        [action.response.name]: action.response
-      });
+      const list = Object.assign([], state);
+      return _.uniqBy(list.concat(action.response), 'name');
     default:
       return state;
   }
@@ -53,6 +53,18 @@ export function loadParamsReducer(state = initialState.loadParams, action) {
   switch(action.type) {
     case types.LOAD_PARAMS:
       return action.response;
+    default:
+      return state;
+  }
+}
+
+export function filterList(state = initialState.filter, action) {
+  switch(action.type) {
+    case types.FILTER_LIST:
+      return Object.assign({}, state, {
+        text: action.response.text,
+        list: action.response.list
+      });
     default:
       return state;
   }

@@ -10,6 +10,7 @@ import StatWidget from '../widgets/StatWidget';
 import StatMeter from '../widgets/StatMeter';
 import PokemonItem from './PokemonItem';
 import BreadCrumb from '../common/BreadCrumb';
+import _ from 'lodash';
 
 class PokemonDetail extends React.Component {
   constructor(props){
@@ -18,11 +19,11 @@ class PokemonDetail extends React.Component {
     this.name = props.params.name;
   }
   componentWillMount(){
-    this.props.dispatch(setPokemonDetail(this.details[this.name]));
+    this.props.dispatch(setPokemonDetail(_.filter(this.details, { 'name': this.name })[0]));
   }
 
   componentDidMount(){
-    this.props.dispatch(getPokemonSpec(this.details[this.name].id));
+    this.props.dispatch(getPokemonSpec(_.filter(this.details, { 'name': this.name })[0].id));
   }
 
   render() {

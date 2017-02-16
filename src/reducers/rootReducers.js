@@ -7,7 +7,8 @@ import {
   pokemonDetailsReducer as details,
   pokemonDetailReducer as detail,
   pokemonSpecReducer as spec,
-  loadParamsReducer as loadParams
+  loadParamsReducer as loadParams,
+  filterList as filter
 } from './pokemonReducer';
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   details,
   detail,
   spec,
-  loadParams
+  loadParams,
+  filter
 });
 
 export default rootReducer;

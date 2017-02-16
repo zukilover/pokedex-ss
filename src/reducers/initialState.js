@@ -11,5 +11,9 @@ export default {
   loadParams: {
     hasMore: true,
     next: null
+  },
+  filter: {
+    text: null,
+    list: []
   }
 }

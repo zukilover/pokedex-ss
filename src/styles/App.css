@@ -40,3 +40,18 @@
   color: #f0f0f0;
   margin-bottom: 0;
 }
+
+.label-ability{
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.contain-ability{
+  margin-bottom: -6px;
+}
+
+.stat-meter .progress{
+  height: .25rem;
+  margin-bottom: 0;
+  margin-top: 4px;
+}

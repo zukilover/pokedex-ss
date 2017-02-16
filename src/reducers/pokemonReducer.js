@@ -27,7 +27,13 @@ export function pokemonDetailsReducer(state = initialState.details, action) {
 export function pokemonDetailReducer(state = initialState.detail, action) {
   switch(action.type) {
     case types.SET_POKEMON_DETAIL:
-      return Object.assign({}, state, action.detail);
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    case types.SET_POKEMON_DETAIL_SUCCESS:
+      return Object.assign({}, state, action.detail, {
+        isFetching: false
+      });
     default:
       return state;
   }

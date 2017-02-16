@@ -17,13 +17,14 @@ class PokemonDetail extends React.Component {
   render() {
     let details   = this.props.details;
     let pokemon   = this.props.detail;
-    let thumbnail = details[pokemon.name] ? details[pokemon.name].sprites.front_shiny : '../images/noun_560380_cc.png';
+    let loading   = pokemon.isFetching;
+    let thumbnail = details[pokemon.name] && !loading ? details[pokemon.name].sprites.front_shiny : '../images/noun_560380_cc.png';
     return (
       <Row className="contain-detail">
         <Column large={3}>
           <div className="card">
             <div className="card-section text-center">
-              <h4>{pokemon.name}</h4>
+              { loading ? null : <h4>{pokemon.name}</h4> }
               <Link to={'/pokemon/' + pokemon.name}>
                 <p className="contain-thumbnail"><img src={thumbnail} /></p>
               </Link>
@@ -34,14 +35,23 @@ class PokemonDetail extends React.Component {
           <table className="stack">
             <thead>
             <tr>
-              <th>Description</th>
+              <th>{ loading ? 'Loading...' : 'Description' }</th>
             </tr>
             </thead>
             <tbody>
             <tr>
               <td>
-                <p className="text-loading">.............. ....... ..................</p>
-                <p className="text-loading">................. ............. .....</p>
+                {
+                  loading ?
+                    (
+                      <div className="loading">
+                        <p className="text-loading">.............. ....... ..................</p>
+                        <p className="text-loading">................. ............. .....</p>
+                      </div>
+                    )
+                  :
+                  <p>{pokemon.description}</p>
+                }
               </td>
             </tr>
             </tbody>

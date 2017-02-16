@@ -41,9 +41,14 @@
   margin-bottom: 0;
 }
 
-.label-ability{
+.label-ability,
+.label-type{
   margin-right: 6px;
   margin-bottom: 6px;
+}
+
+.label-type{
+  font-size: 1.4rem;
 }
 
 .contain-ability{
@@ -54,4 +59,10 @@
   height: .25rem;
   margin-bottom: 0;
   margin-top: 4px;
+}
+
+[class^="fi-"],
+[class*="fi-"]{
+  margin-right: 6px;
+  color: #cccccc;
 }

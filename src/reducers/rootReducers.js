@@ -5,13 +5,15 @@ import { combineReducers } from 'redux';
 import {
   pokemonReducer as pokemons,
   pokemonDetailsReducer as details,
-  pokemonDetailReducer as detail
+  pokemonDetailReducer as detail,
+  pokemonSpecReducer as spec
 } from './pokemonReducer';
 
 const rootReducer = combineReducers({
   pokemons,
   details,
-  detail
+  detail,
+  spec
 });
 
 export default rootReducer;

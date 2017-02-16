@@ -4,7 +4,8 @@
 export default {
   pokemons: [],
   details: [],
-  detail: {
+  detail: {},
+  spec: {
     isFetching: false
   }
 }

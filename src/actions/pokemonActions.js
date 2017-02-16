@@ -26,14 +26,18 @@ export function loadPokemonDetail(name) {
 
 export function setPokemonDetail(detail) {
   return function(dispatch) {
-    dispatch({ type: types.SET_POKEMON_DETAIL });
-    return pokemonApi.getPokemonSpec(detail.id).then(response => {
-      detail = Object.assign({}, detail, {
-        description: response.flavor_text_entries[1].flavor_text
-      });
+    dispatch({ type: types.SET_POKEMON_DETAIL, detail });
+  };
+}
+
+export function getPokemonSpec(id) {
+  return function(dispatch) {
+    dispatch({ type: types.GET_POKEMON_SPEC });
+    return pokemonApi.getPokemonSpec(id).then(response => {
+      let spec = Object.assign({}, response);
       dispatch({
-        type: types.SET_POKEMON_DETAIL_SUCCESS,
-        detail
+        type: types.GET_POKEMON_SPEC_SUCCESS,
+        spec
       });
     }).catch(error => {
       throw(error);

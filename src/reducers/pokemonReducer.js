@@ -23,3 +23,12 @@ export function pokemonDetailsReducer(state = initialState.details, action) {
       return state;
   }
 }
+
+export function pokemonDetailReducer(state = initialState.detail, action) {
+  switch(action.type) {
+    case types.SET_POKEMON_DETAIL:
+      return Object.assign({}, state, action.detail);
+    default:
+      return state;
+  }
+}

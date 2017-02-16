@@ -3,5 +3,6 @@
  */
 export default {
   pokemons: [],
-  details: []
+  details: [],
+  detail: {}
 }

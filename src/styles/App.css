@@ -33,3 +33,10 @@
 .top-bar{
   margin-bottom: 40px;
 }
+
+.text-loading{
+  font-family: 'Blokk';
+  font-size: 18px;
+  color: #f0f0f0;
+  margin-bottom: 0;
+}

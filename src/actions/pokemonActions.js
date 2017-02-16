@@ -24,6 +24,22 @@ export function loadPokemonDetail(name) {
   };
 }
 
+export function setPokemonDetail(detail) {
+  return function(dispatch) {
+    return pokemonApi.getPokemonSpec(detail.id).then(response => {
+      detail = Object.assign({}, detail, {
+        description: response.flavor_text_entries[1].flavor_text
+      });
+      dispatch({
+        type: types.SET_POKEMON_DETAIL,
+        detail
+      });
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function loadPokemonsSuccess(response) {
   return {
     type: types.LOAD_POKEMONS_SUCCESS,

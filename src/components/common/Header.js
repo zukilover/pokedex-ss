@@ -27,16 +27,6 @@ const Header = () => {
           </Column>
         </Row>
       </div>
-      <Row>
-        <Column large={12}>
-          <nav role="navigation">
-            <ul className="breadcrumbs">
-              <li><a href="#0">Pokemons</a></li>
-              <li className="disabled">Current</li>
-            </ul>
-          </nav>
-        </Column>
-      </Row>
     </div>
   );
 };

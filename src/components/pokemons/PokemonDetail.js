@@ -9,6 +9,7 @@ import StatBox from '../common/StatBox';
 import StatWidget from '../widgets/StatWidget';
 import StatMeter from '../widgets/StatMeter';
 import PokemonItem from './PokemonItem';
+import BreadCrumb from '../common/BreadCrumb';
 
 class PokemonDetail extends React.Component {
   constructor(props){
@@ -30,6 +31,7 @@ class PokemonDetail extends React.Component {
     let thumbnail = pokemon.sprites ? pokemon.sprites.front_shiny : '../images/noun_560380_cc.png';
     return (
       <Row className="contain-detail">
+        <BreadCrumb name={pokemon.name} />
         <PokemonItem pokemon={pokemon} isDetail>
           <p className="contain-thumbnail"><img src={thumbnail} /></p>
         </PokemonItem>

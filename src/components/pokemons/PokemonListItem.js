@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import {
   Colors,
-  Button,
-  Column
+  Button
 } from 'react-foundation';
 import { loadPokemonDetail } from '../../actions/pokemonActions';
+import PokemonItem from './PokemonItem';
 
 class PokemonListItem extends React.Component {
   componentDidMount(){
@@ -18,17 +18,12 @@ class PokemonListItem extends React.Component {
     const details   = this.props.details;
     const thumbnail = details[pokemon.name] ? details[pokemon.name].sprites.front_shiny : 'images/noun_560380_cc.png';
     return(
-    <Column large={3}>
-      <div className="card">
-        <div className="card-section text-center">
-          <h4>{this.props.pokemon.name}</h4>
-          <Link to={'/pokemon/' + pokemon.name}>
-            <p className="contain-thumbnail"><img src={thumbnail} /></p>
-            <Button color={Colors.PRIMARY} isDisabled={!details[pokemon.name]}>Lihat detail</Button>
-          </Link>
-        </div>
-      </div>
-    </Column>
+      <PokemonItem pokemon={pokemon}>
+        <Link to={'/pokemon/' + pokemon.name}>
+          <p className="contain-thumbnail"><img src={thumbnail} /></p>
+          <Button color={Colors.PRIMARY} isDisabled={!details[pokemon.name]}>Lihat detail</Button>
+        </Link>
+      </PokemonItem>
     )
   }
 }

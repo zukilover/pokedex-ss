@@ -3,59 +3,47 @@
  */
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { setPokemonDetail } from '../../actions/pokemonActions';
+import { setPokemonDetail, getPokemonSpec } from '../../actions/pokemonActions';
 import { Row, Column } from 'react-foundation';
-import { Link } from 'react-router';
+import StatBox from '../common/StatBox';
+import StatWidget from '../widgets/StatWidget';
+import StatMeter from '../widgets/StatMeter';
+import PokemonItem from './PokemonItem';
 
 class PokemonDetail extends React.Component {
+  constructor(props){
+    super(props);
+    this.details = props.details;
+    this.name = props.params.name;
+  }
+  componentWillMount(){
+    this.props.dispatch(setPokemonDetail(this.details[this.name]));
+  }
+
   componentDidMount(){
-    const details = this.props.details;
-    const name = this.props.params.name;
-    this.props.dispatch(setPokemonDetail(details[name]));
+    this.props.dispatch(getPokemonSpec(this.details[this.name].id));
   }
 
   render() {
-    let details   = this.props.details;
-    let pokemon   = this.props.detail;
-    let loading   = pokemon.isFetching;
-    let thumbnail = details[pokemon.name] && !loading ? details[pokemon.name].sprites.front_shiny : '../images/noun_560380_cc.png';
+    let pokemon = this.props.detail;
+    let isFetchingSpec = this.props.spec.isFetching;
+    let thumbnail = pokemon.sprites ? pokemon.sprites.front_shiny : '../images/noun_560380_cc.png';
     return (
       <Row className="contain-detail">
-        <Column large={3}>
-          <div className="card">
-            <div className="card-section text-center">
-              { loading ? null : <h4>{pokemon.name}</h4> }
-              <Link to={'/pokemon/' + pokemon.name}>
-                <p className="contain-thumbnail"><img src={thumbnail} /></p>
-              </Link>
-            </div>
-          </div>
-        </Column>
+        <PokemonItem pokemon={pokemon} isDetail>
+          <p className="contain-thumbnail"><img src={thumbnail} /></p>
+        </PokemonItem>
         <Column large={9}>
-          <table className="stack">
-            <thead>
-            <tr>
-              <th>{ loading ? 'Loading...' : 'Description' }</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td>
-                {
-                  loading ?
-                    (
-                      <div className="loading">
-                        <p className="text-loading">.............. ....... ..................</p>
-                        <p className="text-loading">................. ............. .....</p>
-                      </div>
-                    )
-                  :
-                  <p>{pokemon.description}</p>
-                }
-              </td>
-            </tr>
-            </tbody>
-          </table>
+          <StatBox title="Description" loading={isFetchingSpec} isLong icon="align-left">
+            <p>
+              {
+                this.props.spec.flavor_text_entries ?
+                this.props.spec.flavor_text_entries[1].flavor_text : null
+              }
+            </p>
+          </StatBox>
+          <StatWidget content={pokemon} />
+          <StatMeter content={pokemon.stats} />
         </Column>
       </Row>
     );
@@ -64,13 +52,15 @@ class PokemonDetail extends React.Component {
 
 PokemonDetail.propTypes = {
   details: PropTypes.array.isRequired,
-  detail: PropTypes.object.isRequired
+  detail: PropTypes.object.isRequired,
+  spec: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     details: state.details,
-    detail: state.detail
+    detail: state.detail,
+    spec: state.spec
   }
 }
 

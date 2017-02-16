@@ -1,22 +1,22 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
-import React from 'react';
+import React, {PropTypes} from 'react';
+import Header from './common/Header';
 
-let yeomanImage = require('../images/yeoman.png');
-
-class AppComponent extends React.Component {
+class App extends React.Component {
   render() {
     return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
+      <div className="container-fluid">
+        <Header />
+        {this.props.children}
       </div>
     );
   }
 }
 
-AppComponent.defaultProps = {
+App.propTypes = {
+  children: PropTypes.object.isRequired
 };
 
-export default AppComponent;
+export default App;

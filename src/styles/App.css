@@ -66,3 +66,17 @@
   margin-right: 6px;
   color: #cccccc;
 }
+
+.contain-thumbnail{
+  height: 96px;
+  line-height: 96px;
+}
+
+.loading-image{
+  clear: both;
+  width: 100%;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  float: left;
+}

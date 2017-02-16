@@ -46,6 +46,9 @@ export function getPokemonSpec(id) {
 }
 
 export function loadPokemonsSuccess(response) {
+  if(response.detail && response.detail.indexOf('Request was throttled') > -1){
+    return;
+  }
   return function (dispatch, getState) {
     dispatch(loadParams(
       Object.assign({}, response, {

@@ -6,6 +6,7 @@ import { Row } from 'react-foundation';
 import Equalizer from 'react-equalizer';
 import InfiniteScroll from 'react-infinite-scroller';
 import PokemonListItem from './PokemonListItem';
+import LoadingImage from '../common/LoadingImage';
 
 const PokemonList = ({hasMore, loadPokemons, pokemons}) => {
   const allPokemons = pokemons.map(pokemon =>
@@ -18,7 +19,7 @@ const PokemonList = ({hasMore, loadPokemons, pokemons}) => {
           pageStart={0}
           loadMore={loadPokemons}
           hasMore={hasMore}
-          loader={<div className="loader">Loading ...</div>}
+          loader={<LoadingImage />}
         >
         {allPokemons}
         </InfiniteScroll>

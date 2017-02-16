@@ -3,11 +3,12 @@
  */
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
+import _ from 'lodash';
 
 export function pokemonReducer(state = initialState.pokemons, action) {
   switch(action.type) {
     case types.LOAD_POKEMONS_SUCCESS:
-      return state.concat(action.response.results);
+      return _.uniqBy(state.concat(action.response.results), 'name');
     default:
       return state;
   }
